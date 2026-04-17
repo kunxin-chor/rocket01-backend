@@ -20,4 +20,35 @@
 ## To use environment files in your project
 
 1. In the terminal: `npm install dotenv`
-2. 
+2. At the top of `index.js`, add `require('dotenv').config()`
+3. Add your API key to `.env` file]
+
+## Converting from `axios.request(config)` to  `axios.get`
+
+```
+const axios = require('axios');
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'https://fr24api.flightradar24.com/api/live/flight-positions/full?bounds=50.682,46.218,14.422,22.243',
+  headers: {
+       'Accept': 'application/json',
+    'Accept-Version': 'v1',
+    'Authorization': 'Bearer <token>'
+  }
+};
+
+const response = await
+axios.get('https://fr24api.flightradar24.com/api/live/flight-positions/full', {
+   maxBodyLength: Infinity
+   params: {
+      bounds:"50.682,46.218,14.422,22.243"    
+   },
+   headers: {
+      'Accept': 'application/json',
+    'Accept-Version': 'v1',
+    'Authorization': 'Bearer ' + process.env.TOKEN
+   }
+});
+```
